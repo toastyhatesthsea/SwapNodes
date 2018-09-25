@@ -7,6 +7,7 @@ public class SwapNode
      Example:
      Given 1->2->3->4, you should return the list as 2->1->4->3.
      *
+     * This algorithm does not change values in nodes, instead it moves the nodes themselves.
      * @param head ListNode
      * @return ListNode
      */
