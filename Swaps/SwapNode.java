@@ -7,19 +7,31 @@ public class SwapNode
     {
         ListNode current = head;
         ListNode previous = current;
+        ListNode nextCurrent;
+
+        boolean first = true;
 
 
         while (current != null)
         {
-            int firstValue = current.val;
-            int secondValue;
-
             if (current.next != null)
             {
-                ListNode nextCurrent = current.next;
-                current.next = current.next.next;
-                nextCurrent.next = current;
+                ListNode newNode = new ListNode(current.val);
+                ListNode nextNode = new ListNode(current.next.val);
 
+                newNode.next = current.next.next;
+                nextNode.next = newNode;
+
+                previous.next.next = newNode;
+
+                previous = current;
+
+
+                if (first)
+                {
+                    head = nextNode;
+                    first = false;
+                }
             }
             else
             {
@@ -48,18 +60,20 @@ class SwapTesters
     {
 
 
-        ListNode l1 = new ListNode(2);
+        ListNode l1 = new ListNode(1);
         l1.next = new ListNode(2);
         l1.next.next = new ListNode(3);
-        l1.next.next.next = new ListNode(3);
+        l1.next.next.next = new ListNode(4);
 
         ListNode l2 = new ListNode(2);
         l2.next = new ListNode(3);
         l2.next.next = new ListNode(4);
         l2.next.next.next = new ListNode(5);
 
-        SwapNode blahs = new SwapNode();
+        l1.next.next.next.next = l2;
 
+        SwapNode blahs = new SwapNode();
+        ListNode head = blahs.swapPairs(l1);
 
 
     }
