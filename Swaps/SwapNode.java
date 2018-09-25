@@ -8,36 +8,41 @@ public class SwapNode
         ListNode answer = head;
         ListNode current = head;
         ListNode previous = current;
-        ListNode nextCurrent;
+        ListNode currentAnswerPointer = answer;
 
         boolean first = true;
 
 
         while (current != null)
         {
-            if (current.next != null)
+
+            if (previous != current)
             {
-                nextCurrent = current.next;
+                previous.next = current.next;
+                current.next = previous;
 
-                current.next = current.next.next;
-                nextCurrent.next = current;
-
-                previous = nextCurrent;
-
-
-                if (first)
+                if (first) // Get head of new linked list
                 {
-                    head = nextCurrent;
+                    answer = current;
+                    currentAnswerPointer = current;
                     first = false;
                 }
+                else
+                {
+                    currentAnswerPointer.next = current;
+                    currentAnswerPointer = currentAnswerPointer.next;
+                }
+
+                current = current.next.next.next;
+                previous = previous.next;
             }
             else
             {
-                break;
+                previous = current;
+                current = current.next;
             }
-            current = current.next;
         }
-        return current;
+        return answer;
     }
 
 }
