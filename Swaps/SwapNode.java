@@ -5,6 +5,7 @@ public class SwapNode
 
     public ListNode swapPairs(ListNode head)
     {
+        ListNode answer = head;
         ListNode current = head;
         ListNode previous = current;
         ListNode nextCurrent;
@@ -16,20 +17,17 @@ public class SwapNode
         {
             if (current.next != null)
             {
-                ListNode newNode = new ListNode(current.val);
-                ListNode nextNode = new ListNode(current.next.val);
+                nextCurrent = current.next;
 
-                newNode.next = current.next.next;
-                nextNode.next = newNode;
+                current.next = current.next.next;
+                nextCurrent.next = current;
 
-                previous.next.next = newNode;
-
-                previous = current;
+                previous = nextCurrent;
 
 
                 if (first)
                 {
-                    head = nextNode;
+                    head = nextCurrent;
                     first = false;
                 }
             }
@@ -37,7 +35,7 @@ public class SwapNode
             {
                 break;
             }
-            current = current.next.next;
+            current = current.next;
         }
         return current;
     }
